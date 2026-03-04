@@ -1,17 +1,13 @@
-﻿using PetRec.Domain;
-using PetRec.Infrastructure;
-using PetRec.Mobile.ViewModels;
-using System.Collections.ObjectModel;
+﻿using PetRec.Mobile.ViewModels;
 
-namespace PetRec.Mobile
+namespace PetRec.Mobile;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    
+    public MainPage(MainPageViewModel vm)
     {
-        
-        public MainPage()
-        {
-            InitializeComponent();
-            BindingContext = new MainPageViewModel();
-        }
+        InitializeComponent();
+        BindingContext = vm;
     }
 }

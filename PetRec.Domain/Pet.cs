@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.Marshalling;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace PetRec.Domain;
 
@@ -22,11 +21,10 @@ public class Pet : IExtensibleDataObject
     public uint Id { get; set; }
 
     [DataMember]
-    public string? Name { get; set; }
+    public string Name { get; set; } = "Ündefined";
 
     [DataMember]
     public PetType Type { get; set; }
 
-    [DataMember]
-    public uint Age { get; set; }
+    public DateTime? BirthDate { get; set; }
 }

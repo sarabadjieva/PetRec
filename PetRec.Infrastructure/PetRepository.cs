@@ -1,35 +1,57 @@
 ﻿using PetRec.Application;
 using PetRec.Domain;
-using Utilities;
-using Utilities.SaveSystem;
 
 namespace PetRec.Infrastructure;
 
 public class PetRepository : IPetRepository
 {
-    //public Task AddAsync(Pet pet)
-    public void AddAsync(Pet pet)
+    private readonly PetDatabase _database;
+
+    public PetRepository(IPetDatabase<PetEntity> db)
     {
-        ArraySaveSystem<Pet>.Append(pet);
+        _database = db as PetDatabase;
     }
 
-    //public Task<List<Pet>> GetAllAsync()
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    public Task UpdateAsync(Pet pet)
+    public async Task<List<Pet>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var entities = await _database.GetPetsAsync();
+
+        return entities.Select(e => new Pet
+        {
+            Id = (uint)e.Id,
+            Name = e.Name,
+            Type = e.Type,
+            BirthDate = e.BirthDate
+        }).ToList();
     }
 
-    public List<Pet> GetAllAsync()
+    public async Task AddAsync(Pet pet)
     {
-        return ArraySaveSystem<Pet>.Load().ToList();
+        var entity = new PetEntity
+        {
+            Name = pet.Name,
+            Type = pet.Type,
+            BirthDate = pet.BirthDate
+        };
+
+        await _database.AddPetAsync(entity);
     }
 
-    public void ClearAll()
+    public async Task UpdateAsync(Pet pet)
     {
-        ArraySaveSystem<Pet>.DeleteAllCache();
+        var entity = new PetEntity
+        {
+            Id = pet.Id,
+            Name = pet.Name,
+            Type = pet.Type,
+            BirthDate = pet.BirthDate
+        };
+
+        await _database.UpdatePetAsync(entity);
+    }
+
+    public async Task DeleteAll()
+    {
+        await _database.DeleteAll();
     }
 }
