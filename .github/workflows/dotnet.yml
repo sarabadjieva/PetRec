@@ -1,0 +1,34 @@
+name: Build and Test
+
+on:
+  push:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: Add GitHub Packages NuGet source
+      run: dotnet nuget add source "https://nuget.pkg.github.com/sarabadjieva/index.json" --name github --username sarabadjieva --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+    - name: Restore dependencies
+      run: dotnet restore
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build the project
+      run: dotnet build --no-restore
+
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
