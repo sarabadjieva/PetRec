@@ -27,6 +27,9 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Restore workload
+      run: dotnet workload restore
+
     - name: Build the project
       run: dotnet build --no-restore
 
