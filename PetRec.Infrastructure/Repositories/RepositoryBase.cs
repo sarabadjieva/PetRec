@@ -1,6 +1,6 @@
 ﻿using PetRec.Application;
 
-namespace PetRec.Infrastructure;
+namespace PetRec.Infrastructure.Repositories;
 
 internal abstract class RepositoryBase<TDomain, TRecord> : IRepository<TDomain> 
     where TDomain : class
