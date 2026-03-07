@@ -1,15 +1,16 @@
 ﻿using PetRec.Domain;
-using PetRec.Infrastructure;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using PetRec.Infrastructure;
+using PetRec.Infrastructure.Repositories;
 
 namespace PetRec.Mobile.ViewModels;
 
 public class MainPageViewModel : INotifyPropertyChanged
 {
-    private readonly PetRepository _repo;
+    private readonly IPetRepository _repo;
     
     public ObservableCollection<PetViewModel> Pets { get; } = new();
     public ICommand AddPetCommand { get; }
@@ -18,9 +19,10 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public MainPageViewModel(PetRepository repo)
+    public MainPageViewModel(IPetRepository repo)
     {
         _repo = repo;
+
         AddPetCommand = new Command(async () => await AddPetCommandImpl());
         SelectPetCommand = new Command<uint>(SelectPetCommandImpl);
     }
@@ -29,7 +31,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         await _repo.AddAsync(new Pet
         {
-            Name = $"Pet {DateTime.Now.Ticks % 100}"
+            Name = $"Pet {DateTime.Now.Ticks % 1000}"
         });
 
         await LoadPetsAsync();

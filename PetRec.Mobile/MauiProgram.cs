@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PetRec.Application;
 using PetRec.Infrastructure;
-using PetRec.Mobile.ViewModels;
 
 namespace PetRec.Mobile;
 
@@ -24,14 +23,15 @@ public static class MauiProgram
 
         // DI registrations
         builder.Services.AddSingleton<IAppDataPathProvider, MauiAppDataPathProvider>();
-        builder.Services.AddSingleton<IPetDatabase<PetEntity>>(sp =>
-        {
-            var pathProvider = sp.GetRequiredService<IAppDataPathProvider>();
-            return new PetDatabase(pathProvider.GetDatabasePath());
-        });
+        //builder.Services.AddSingleton<IPetDatabase<PetEntity>>(sp =>
+        //{
+        //    var pathProvider = sp.GetRequiredService<IAppDataPathProvider>();
+        //    return new PetDatabase(pathProvider);
+        //});
 
-        builder.Services.AddSingleton<PetRepository>();  // injects IPetDatabase inside repo
-        builder.Services.AddSingleton<MainPageViewModel>();
+        builder.Services.AddInfrastructure();
+        //builder.Services.AddSingleton<IRepository, PetRepository>();  // injects IPetDatabase inside repo
+        //builder.Services.AddSingleton<MainPageViewModel>();
 
         return builder.Build();
     }

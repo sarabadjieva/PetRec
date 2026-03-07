@@ -24,7 +24,7 @@
                             Command="{Binding SelectPetCommand,
                             Source={RelativeSource AncestorType={x:Type petvm:MainPageViewModel}}}"
                             CommandParameter="{Binding Id}"
-                            Text="{Binding Name}"
+                            Text="{Binding Id}"
                             CornerRadius="100"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace PetRec.Domain;
+﻿namespace PetRec.Domain;
 
 public enum PetType
 {
@@ -12,19 +10,18 @@ public enum PetType
     Reptile
 }
 
-[DataContract]
-public class Pet : IExtensibleDataObject
+public interface IPet
 {
-    public ExtensionDataObject? ExtensionData { get; set ; }
-    
-    [DataMember]
+    uint Id { get; set; }
+    string Name { get; set; }
+    PetType Type { get; set; }
+    DateTime? BirthDate { get; set; }
+}
+
+public class Pet : IPet
+{
     public uint Id { get; set; }
-
-    [DataMember]
-    public string Name { get; set; } = "Ündefined";
-
-    [DataMember]
+    public string Name { get; set; } = "Undefined";
     public PetType Type { get; set; }
-
     public DateTime? BirthDate { get; set; }
 }

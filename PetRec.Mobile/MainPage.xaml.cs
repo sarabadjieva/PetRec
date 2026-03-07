@@ -1,13 +1,15 @@
-﻿using PetRec.Mobile.ViewModels;
+﻿using PetRec.Infrastructure;
+using PetRec.Infrastructure.Repositories;
+using PetRec.Mobile.ViewModels;
 
 namespace PetRec.Mobile;
 
 public partial class MainPage : ContentPage
 {
     
-    public MainPage(MainPageViewModel vm)
+    public MainPage(IPetRepository repo)
     {
         InitializeComponent();
-        BindingContext = vm;
+        BindingContext = new MainPageViewModel(repo);
     }
 }

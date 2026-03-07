@@ -7,18 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Arabadjieva.Utilities" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PetRec.Application\PetRec.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Utilities">
-      <HintPath>..\..\sarabadjieva\Utilities\Utilities\obj\Debug\net9.0\Utilities.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
