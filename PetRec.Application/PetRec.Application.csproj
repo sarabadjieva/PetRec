@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PetRec.Domain\PetRec.Domain.csproj" />
+    <ProjectReference Include="..\PetRec.Domain\PetRec.Core.csproj" />
   </ItemGroup>
 
 </Project>

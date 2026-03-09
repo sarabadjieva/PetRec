@@ -1,4 +1,4 @@
-﻿namespace PetRec.Application;
+﻿namespace PetRec.Core.Interfaces;
 
 public interface IDatabaseRecord
 {

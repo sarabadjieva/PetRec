@@ -8,24 +8,28 @@
             Padding="30,0"
             Spacing="25">
 
-            <CollectionView
-                x:Name="PetsListView"
-                SemanticProperties.Hint="List of pets in the registry"
-                WidthRequest="100"
-                ItemsSource="{Binding Pets}">
+            <CollectionView x:Name="PetsListView"
+                            SemanticProperties.Hint="List of pets in the registry"
+                            WidthRequest="100"
+                            ItemsSource="{Binding Pets}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="petvm:PetViewModel">
-                        <Button
-                            HorizontalOptions="Center"
-                            HeightRequest="100"
-                            WidthRequest="100"
-                            Margin="0,5"
-                            BackgroundColor="White"
-                            Command="{Binding SelectPetCommand,
-                            Source={RelativeSource AncestorType={x:Type petvm:MainPageViewModel}}}"
-                            CommandParameter="{Binding Id}"
-                            Text="{Binding Id}"
-                            CornerRadius="100"/>
+                        <VerticalStackLayout HorizontalOptions="Center"
+                                             VerticalOptions="Center">
+                                <Button HorizontalOptions="Center"
+                                        HeightRequest="100"
+                                        WidthRequest="100"
+                                        Margin="0,5"
+                                        BackgroundColor="White"
+                                        Command="{Binding SelectPetCommand,
+                                        Source={RelativeSource AncestorType={x:Type petvm:MainPageViewModel}}}"
+                                        CommandParameter="{Binding Id}"
+                                        ImageSource="{Binding Image}"
+                                        CornerRadius="100"/>
+                            <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Id}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding PetType}" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

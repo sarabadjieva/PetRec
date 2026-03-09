@@ -1,6 +1,5 @@
 <Solution>
-  <Project Path="PetRec.Application/PetRec.Application.csproj" />
-  <Project Path="PetRec.Domain/PetRec.Domain.csproj" />
+  <Project Path="PetRec.Domain/PetRec.Core.csproj" />
   <Project Path="PetRec.Infrastructure/PetRec.Infrastructure.csproj" />
   <Project Path="PetRec.Mobile/PetRec.Mobile.csproj">
     <Deploy Solution="Debug|*" />

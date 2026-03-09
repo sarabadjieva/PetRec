@@ -1,4 +1,4 @@
-﻿using PetRec.Application;
+﻿using PetRec.Core.Interfaces;
 using SQLite;
 
 namespace PetRec.Infrastructure;

@@ -1,4 +1,4 @@
-﻿using PetRec.Application;
+﻿using PetRec.Core.Interfaces;
 
 namespace PetRec.Infrastructure.Repositories;
 
@@ -22,7 +22,7 @@ internal abstract class RepositoryBase<TDomain, TRecord> : IRepository<TDomain>
     {
         var entities = await _database.GetAllAsync<TRecord>();
 
-        return entities.Select(ToDomain).ToList();
+        return [.. entities.Select(ToDomain)];
     }
 
     public async Task AddAsync(TDomain entity)

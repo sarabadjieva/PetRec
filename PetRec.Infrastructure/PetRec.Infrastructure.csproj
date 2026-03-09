@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PetRec.Application\PetRec.Application.csproj" />
+    <ProjectReference Include="..\PetRec.Domain\PetRec.Core.csproj" />
   </ItemGroup>
 
 </Project>

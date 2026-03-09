@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using PetRec.Application;
+using PetRec.Core.Interfaces;
 using PetRec.Infrastructure;
 
 namespace PetRec.Mobile;

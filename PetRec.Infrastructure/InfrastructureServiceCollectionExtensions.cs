@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PetRec.Application;
+using PetRec.Core.Interfaces;
 using PetRec.Infrastructure.Repositories;
 
 namespace PetRec.Infrastructure;

@@ -1,15 +1,12 @@
 ﻿using PetRec.Core.Enums;
 using PetRec.Core.Interfaces;
-using SQLite;
 
-namespace PetRec.Infrastructure.Records;
+namespace PetRec.Core.Entities;
 
-[Table("Pets")]
-internal class PetRecord : IDatabaseRecord, IPet
+public class Pet : IPet
 {
-    [PrimaryKey, AutoIncrement]
     public uint Id { get; set; }
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; } = "Undefined";
     public PetType Type { get; set; }
     public DateTime? BirthDate { get; set; }
 

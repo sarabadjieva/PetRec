@@ -1,9 +1,8 @@
-﻿using PetRec.Domain;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using PetRec.Infrastructure;
+using PetRec.Core.Entities;
 using PetRec.Infrastructure.Repositories;
 
 namespace PetRec.Mobile.ViewModels;
