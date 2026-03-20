@@ -2,8 +2,8 @@
 
 public interface ICalendarEntry
 {
-    uint Id { get; set; }
-    uint PetId { get; set; }
-    DateTime? DateAndTime { get; set; }
-    string Description { get; set; }
+    uint Id { get; }
+    uint PetId { get; }
+    DateTime? DateAndTime { get; }
+    string Description { get; }
 }

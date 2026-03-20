@@ -1,7 +1,7 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PetRec.Mobile.MainPage"
-             xmlns:petvm="clr-namespace:PetRec.Mobile.ViewModels">
+             x:Class="PetRec.Mobile.Main.MainPage"
+             xmlns:main="clr-namespace:PetRec.Mobile.Main">
 
     <ScrollView>
         <VerticalStackLayout
@@ -13,7 +13,7 @@
                             WidthRequest="100"
                             ItemsSource="{Binding Pets}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="petvm:PetViewModel">
+                    <DataTemplate x:DataType="main:PetViewModel">
                         <VerticalStackLayout HorizontalOptions="Center"
                                              VerticalOptions="Center">
                                 <Button HorizontalOptions="Center"
@@ -22,13 +22,13 @@
                                         Margin="0,5"
                                         BackgroundColor="White"
                                         Command="{Binding SelectPetCommand,
-                                        Source={RelativeSource AncestorType={x:Type petvm:MainPageViewModel}}}"
+                                        Source={RelativeSource AncestorType={x:Type main:MainPageViewModel}}}"
                                         CommandParameter="{Binding Id}"
                                         ImageSource="{Binding Image}"
                                         CornerRadius="100"/>
                             <Label Text="{Binding Name}" HorizontalTextAlignment="Center"/>
                             <Label Text="{Binding Id}" HorizontalTextAlignment="Center"/>
-                            <Label Text="{Binding PetType}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Type}" HorizontalTextAlignment="Center"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -4,25 +4,24 @@ namespace PetRec.Infrastructure.Repositories;
 
 internal abstract class RepositoryBase<TDomain, TRecord> : IRepository<TDomain> 
     where TDomain : class
-    where TRecord : class, IDatabaseRecord, new()
+    where TRecord : class, TDomain, IDatabaseRecord, new()
 {
     private readonly IDatabase _database;
 
-    public RepositoryBase(IDatabase db)
+    protected RepositoryBase(IDatabase db)
     {
         _database = db;
         _database.DropTableAsync<TRecord>();
         _database.CreateTableAsync<TRecord>().Wait();
     }
 
-    protected abstract TDomain ToDomain(TRecord record);
     protected abstract TRecord ToRecord(TDomain domain);
 
     public async Task<List<TDomain>> GetAllAsync()
     {
         var entities = await _database.GetAllAsync<TRecord>();
 
-        return [.. entities.Select(ToDomain)];
+        return [.. entities];
     }
 
     public async Task AddAsync(TDomain entity)

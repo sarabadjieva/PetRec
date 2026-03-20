@@ -1,5 +1,4 @@
 ﻿using PetRec.Core.Interfaces;
-using PetRec.Core.Entities;
 using PetRec.Infrastructure.Records;
 
 namespace PetRec.Infrastructure.Repositories;
@@ -8,24 +7,11 @@ public interface IPetRepository : IRepository<IPet>
 {
 }
 
-internal class PetRepository : RepositoryBase<IPet, PetRecord>, IPetRepository
+internal class PetRepository(IDatabase db)
+    : RepositoryBase<IPet, PetRecord>(db), IPetRepository
 {
-    public PetRepository(IDatabase db) : base(db)
-    {
-    }
-
-    protected override IPet ToDomain(PetRecord record) =>
-        new Pet
-        {
-            Id = record.Id,
-            Name = record.Name,
-            Type = record.Type,
-            BirthDate = record.BirthDate,
-            ImagePath = record.ImagePath
-        };
-
     protected override PetRecord ToRecord(IPet domain) =>
-        new PetRecord 
+        new()
         {
             //Id = domain.Id,
             Name = domain.Name,

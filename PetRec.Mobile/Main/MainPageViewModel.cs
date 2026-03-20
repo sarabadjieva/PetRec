@@ -2,25 +2,27 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using PetRec.Core.Entities;
 using PetRec.Infrastructure.Repositories;
+using PetRec.Mobile.Calendar;
 
-namespace PetRec.Mobile.ViewModels;
+namespace PetRec.Mobile.Main;
 
 public class MainPageViewModel : INotifyPropertyChanged
 {
     private readonly IPetRepository _repo;
+    private readonly ICalendarRepository _calendarRepo;
     
-    public ObservableCollection<PetViewModel> Pets { get; } = new();
+    public ObservableCollection<PetViewModel> Pets { get; } = [];
     public ICommand AddPetCommand { get; }
     public ICommand SelectPetCommand { get; }
     public string AddPetBtnText => $"Add pet {Pets.Count + 1}";
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public MainPageViewModel(IPetRepository repo)
+    public MainPageViewModel(IPetRepository repo, ICalendarRepository calendarRepository)
     {
         _repo = repo;
+        _calendarRepo = calendarRepository;
 
         AddPetCommand = new Command(async () => await AddPetCommandImpl());
         SelectPetCommand = new Command<uint>(SelectPetCommandImpl);
@@ -28,7 +30,7 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     public async Task AddPetCommandImpl()
     {
-        await _repo.AddAsync(new Pet
+        await _repo.AddAsync(new Pet()
         {
             Name = $"Pet {DateTime.Now.Ticks % 1000}"
         });
@@ -50,6 +52,7 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     private void SelectPetCommandImpl(uint id)
     {
+        Shell.Current.Navigation.PushAsync(new CalendarPage(_calendarRepo));
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>

@@ -7,19 +7,15 @@ public interface ICalendarRepository : IRepository<ICalendarEntry>
 {
 }
 
-internal class CalendarRepository : RepositoryBase<ICalendarEntry, CalendarRecord>, ICalendarRepository
+internal class CalendarRepository(IDatabase db)
+    : RepositoryBase<ICalendarEntry, CalendarRecord>(db), ICalendarRepository
 {
-    public CalendarRepository(IDatabase db) : base(db)
+    protected override CalendarRecord ToRecord(ICalendarEntry domain) =>
+    new() 
     {
-    }
-
-    protected override ICalendarEntry ToDomain(CalendarRecord record)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override CalendarRecord ToRecord(ICalendarEntry domain)
-    {
-        throw new NotImplementedException();
-    }
+        //Id = domain.Id,
+        PetId = domain.PetId,
+        DateAndTime = domain.DateAndTime,
+        Description = domain.Description
+    };
 }
